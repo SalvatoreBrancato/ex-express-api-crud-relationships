@@ -12,6 +12,12 @@ async function create(req, res){
             image: datiInIngresso.image,    
             content: datiInIngresso.content,  
             published: datiInIngresso.published,
+            categoryId: datiInIngresso.categoryId,
+            tags: {
+                connect: datiInIngresso.tags.map((elem)=>{
+                    return {id: elem}
+                })
+            }
         }
 
     }) 
