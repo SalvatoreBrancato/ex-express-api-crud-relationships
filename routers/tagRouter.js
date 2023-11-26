@@ -4,7 +4,7 @@ const tagsController = require('../controllers/tagsController')
 
 
 router.post('/create', tagsController.create)
-router.post('/update/:id', tagsController.update)
-router.post('/destroy/:id', tagsController.destroy )
+router.put('/update/:id', tagsController.update)
+router.delete('/destroy/:id', tagsController.destroy )
 
 module.exports = router

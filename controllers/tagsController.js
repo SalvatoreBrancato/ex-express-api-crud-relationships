@@ -1,6 +1,8 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+
+
 //CREATE
 async function create(req, res){
     const datiInIngresso = req.body

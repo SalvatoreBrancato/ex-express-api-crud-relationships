@@ -4,8 +4,8 @@ const categoriesController = require('../controllers/categoriesController');
 
 
 router.post('/create', categoriesController.create)
-router.post('/update/:id', categoriesController.update)
-router.post('/destroy/:id', categoriesController.destroy )
+router.put('/update/:id', categoriesController.update)
+router.delete('/destroy/:id', categoriesController.destroy )
 
 
 

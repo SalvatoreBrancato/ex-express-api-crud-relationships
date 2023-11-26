@@ -38,7 +38,7 @@ async function show(req, res){
                     name:true
                 }
             },
-            tag: true
+            tags: true
         }
     })
 
@@ -60,7 +60,16 @@ async function showAll(req, res){
         const data = await prisma.post.findMany({
             where: {
                 published: true
+            },
+            include: {
+                category: {
+                    select:{
+                        name : true
+                    }
+                },
+                tags: true
             }
+
         })
         return res.json(data)
     }
@@ -105,9 +114,16 @@ async function update(req, res){
     }
 
     const postAggiornato = await prisma.post.update({
-        data: datiInIngresso,
-        where: {
-            slug: slug
+            where: {
+                slug: slug
+            },
+            data: {
+                ...datiInIngresso,
+            tags: {
+                set: datiInIngresso.tags.map((elem)=>{
+                    return {id: elem}
+                })
+            }
         }
     })
     return res.json(postAggiornato)
@@ -119,7 +135,7 @@ async function destroy(req, res){
     await prisma.post.delete({
         where: {
             slug: slug
-        }
+        },
     })
 
     return res.json({message: "Post eliminato"})
